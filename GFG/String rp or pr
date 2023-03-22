@@ -1,0 +1,53 @@
+String rp or pr
+
+Given a string S. In one operation, you can remove the substring "pr" from the string S 
+and get amount X or you can remove the substring "rp" and get the amount Y. 
+Find the maximum amount you can get if you perform zero or more such operations optimally. 
+
+Note : 
+
+Substring of a string S is defined as a continuous sequence of characters in S.
+After removing pr or rp, the order of remaining letters should remain the same.
+
+class Solution{   
+public:
+    long long solve(int X,int Y,string S){
+      //code here
+      long long res=0;
+      stack<char>st;
+      string s1="pr";
+      string s2="rp";
+      if(Y>X){
+          swap(X,Y);
+          swap(s1,s2);
+      }
+      char first=s1[0];
+      char second=s1[1];
+      for(int i=S.size()-1;i>=0;i--){
+          char cur=S[i];
+          if(st.size()>0 && S[i]==first && st.top()==second){
+              res+=X;
+              st.pop();
+          }
+          else
+          st.push(S[i]);
+      }
+       S="";
+      while(!st.empty()){
+          S+=st.top();
+          st.pop();
+      }
+      first=s2[0];
+      second=s2[1];
+      for(int i=S.size()-1;i>=0;i--){
+          char cur=S[i];
+          if(st.size()>0 && S[i]==first && st.top()==second){
+              res+=Y;
+              st.pop();
+          }
+          else
+          st.push(S[i]);
+      }
+      return res;
+    }
+};
