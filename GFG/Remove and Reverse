@@ -1,0 +1,56 @@
+Remove and Reverse
+
+Given a string S which consists of only lowercase English alphabets, 
+you have to perform the below operations:
+If the string S contains any repeating character, remove the first repeating character and 
+reverse the string and again perform the above operation on the modified string, otherwise, you stop.
+You have to find the final string.
+
+We start our two pointer approach and iterate from start and end and check for our flag variables
+If flag is false we start from left and if find any repeating character we make it to any different character and then do 
+the same for iterating backwards.Its a trick of reversing string!
+
+class Solution {
+  public:
+    string removeReverse(string S) {
+        // code here
+        int n=S.size();
+        bool flag=false;
+        int start=0,end=n-1;
+        unordered_map<char,int>mp;
+        for(auto x:S)
+        mp[x]++;
+        while(start<end){
+           if(flag==false){
+               char temp=S[start];
+               if(mp[temp]>1){
+                   mp[temp]--;
+                   S[start]='#';
+                   start++;
+                   flag=true;
+               }
+               else
+               start++;
+           }
+           else{
+               char temp=S[end];
+               if(mp[temp]>1){
+                   mp[temp]--;
+                   S[end]='#';
+                   end--;
+                   flag=false;
+               }
+               else
+               end--;
+           }
+        }
+        if(flag)
+        reverse(S.begin(),S.end());
+        string res="";
+        for(int i=0;i<S.size();i++){
+            if(S[i]!='#')
+            res+=S[i];
+        }
+        return res;
+    }
+};
