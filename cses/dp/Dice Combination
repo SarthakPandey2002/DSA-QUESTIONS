@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long 
+ 
+int main(){
+ll n;
+cin>>n;
+ll mod=1e9+7;
+vector<ll>dp(n+1,0);
+dp[0]=1;
+for(ll i=1;i<n+1;i++){
+   for(ll x=1;x<=6;x++){
+      if(x>i)
+      break;
+      dp[i]+=dp[i-x];
+      dp[i]%=mod;
+   }
+}
+cout<<dp[n]%mod;
+   return 0;
+}
