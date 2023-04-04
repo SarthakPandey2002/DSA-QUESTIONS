@@ -1,0 +1,33 @@
+Its fibonacci numbers only!
+class Solution {
+public:
+    int climbStairs(int n) {
+        vector<int>dp(n+1,0);
+       dp[0]=1;
+        for(int i=1;i<=n;i++){
+            if(i>1)
+                dp[i]+=dp[i-2];
+            dp[i]+=dp[i-1];
+        }
+        return dp[n];
+    }
+};
+
+class Solution {
+public:
+    int t[50];
+    int f(int x){
+        if(x==0)
+            return 1;
+        if(x<0)
+            return 0;
+        if(t[x]!=-1)
+            return t[x];
+        return t[x]=f(x-1)+f(x-2);
+    }
+    
+    int climbStairs(int n) {
+        memset(t,-1,sizeof(t));
+        return f(n);
+    }
+};
