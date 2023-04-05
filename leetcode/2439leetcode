@@ -1,0 +1,34 @@
+Minimize Maximum of Array
+
+class Solution {
+public:
+    
+    bool isValid(vector<int>& nums,int m ){
+        vector<long long>temp(nums.begin(),nums.end());
+        int n=temp.size();
+        for(int i=0;i<n-1;i++){
+            if(temp[i]>m)
+                return false;
+            long long buffer=m-temp[i];
+            temp[i+1]-=buffer;
+        }
+        return temp[n-1]<=m;
+    }
+    
+    int minimizeArrayValue(vector<int>& nums) {
+        int n=nums.size();
+        int low=0;
+        int high=*max_element(nums.begin(),nums.end());
+        int ans=0;
+    while(low<=high){
+        int mid=low+(high-low)/2;
+        if(isValid(nums,mid)){
+            ans=mid;
+            high=mid-1;
+        }
+        else
+            low=mid+1;
+     }
+        return ans;
+    }
+};
