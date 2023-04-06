@@ -1,0 +1,23 @@
+Given an array A of n positive numbers. The task is to find the first index in the array such that the sum of 
+elements before it is equal to the sum of elements after it.
+
+class Solution {
+  public:
+    int equalSum(int N, vector<int> &A) {
+        // code here
+        int n=N;
+        if(n==1)
+        return 1;
+        vector<int>pre(n);
+        pre[0]=A[0];
+        for(int i=1;i<n;i++){
+            pre[i]=pre[i-1]+A[i];
+        }
+        long long ts=pre[n-1];
+        for(int i=1;i<n-1;i++){
+            if(pre[i-1]==(ts-pre[i]))
+            return i+1;
+        }
+        return -1;
+    }
+};
