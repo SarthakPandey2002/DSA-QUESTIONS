@@ -1,0 +1,42 @@
+class Solution {
+public:
+    
+   int t[401]; 
+    
+int solve(vector<int>& nums,int idx){
+    int n=nums.size();
+    if(idx==n-1)
+        return nums[n-1];
+    if(idx>=n)
+        return 0;
+    if(t[idx]!=-1)
+        return t[idx];
+    int take=nums[idx]+solve(nums,idx+2);
+    int notTake=solve(nums,idx+1);
+    return t[idx]=max(take,notTake);
+}
+    
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        memset(t,-1,sizeof(t));
+        return solve(nums,0);
+    }
+};
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>dp(n,0);
+        for(int i=0;i<n;i++){
+            int take=nums[i];
+            if(i>1)
+            take+=dp[i-2];
+            int notTake=-1e5;
+            if(i>0)
+                notTake=dp[i-1];
+            dp[i]=max(take,notTake);
+        }
+        return dp[n-1];
+    }
+};
