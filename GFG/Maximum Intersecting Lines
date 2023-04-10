@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    int maxIntersections(vector<vector<int>> lines, int N) {
+        // Code here
+        map<long long,int>mp;
+        long long n=N;
+        sort(lines.begin(),lines.end());
+        for(long long i=0;i<n;i++){
+            mp[lines[i][0]]++;
+            (mp[lines[i][1]+1])--;
+        }
+        long long res=0;
+        long long ans=0;
+        for(auto x:mp){
+            res+=x.second;
+            ans=max(ans,res);
+        }
+        return ans;
+    }
+};
