@@ -1,0 +1,68 @@
+// User function Template for C++
+
+class Solution{
+public:
+
+int dp[501][501];
+
+int f(int i,int j,vector<vector<int>>&t){
+    int n=t.size();
+    
+    if(i<0 || j<0 || i>=n || j>=n)
+    return 0;
+    
+    if(i==0)
+    return t[i][j];
+    
+    if(dp[i][j]!=-1)
+    return dp[i][j];
+    
+    int lu=t[i][j];
+    if(j>0)
+    lu+=f(i-1,j-1,t);
+    int tu=t[i][j]+f(i-1,j,t);
+    int tr=t[i][j];
+    if(j+1<n)
+    tr+=f(i-1,j+1,t);
+    return dp[i][j]=max({lu,tu,tr});
+}
+
+    int maximumPath(int N, vector
+    
+    // User function Template for C++
+
+class Solution{
+public:
+    int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        // code here
+        vector<vector<int>>dp(N,vector<int>(N,0));
+        for(int i=0;i<N;i++)
+        dp[0][i]=Matrix[0][i];
+        for(int i=1;i<N;i++){
+            for(int j=0;j<N;j++){
+                int a=Matrix[i][j];
+                if(j>0)a+=dp[i-1][j-1];
+                int b=Matrix[i][j]+dp[i-1][j];
+                int c=Matrix[i][j];
+                if(j+1<N)c+=dp[i-1][j+1];
+                dp[i][j]=max({a,b,c});
+            }
+        }
+        int ans=0;
+        for(int i=0;i<N;i++)
+        ans=max(ans,dp[N-1][i]);
+        return ans;
+    }
+};<vector<int>> Matrix)
+    {
+        // code here
+        memset(dp,-1,sizeof(dp));
+        int ans=0;
+        for(int i=0;i<N;i++){
+            ans=max(ans,f(N-1,i,Matrix));
+        }
+        return ans;
+    }
+};
+
