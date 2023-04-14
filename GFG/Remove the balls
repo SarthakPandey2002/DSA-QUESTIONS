@@ -1,0 +1,18 @@
+Imagine an imaginary array of length N containing balls. Given 2 arrays color and radius of length N each, 
+where color[i] represents the color of the ith ball while radius[i] represents the radius of ith ball. 
+If two consecutive balls have the same color and size, 
+both are removed from the array. Geek wants to know the length of the final imaginary array.
+
+int finLength(int N, vector<int> color, vector<int> radius) {
+        stack<pair<int,int>>st;
+        st.push({color[0],radius[0]});
+        for(int i=1;i<N;i++){
+            if(!st.empty() && st.top().first==color[i] && st.top().second==radius[i]){
+            while(!st.empty() && st.top().first==color[i] && st.top().second==radius[i])
+            st.pop();    
+            }
+            else
+            st.push({color[i],radius[i]});
+        }
+        return st.size();
+    }
