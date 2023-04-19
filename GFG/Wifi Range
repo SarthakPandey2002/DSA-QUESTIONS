@@ -1,0 +1,27 @@
+class Solution{
+    public:
+    bool wifiRange(int N, string S, int X){
+        // code here
+        int n=N;
+        vector<int>dp(N,0);
+        for(int i=0;i<n;i++){
+            if(S[i]=='1'){
+                int a=i-X;
+                if(a>=0)
+                dp[a]++;
+                else
+                dp[0]++;
+                int b=i+X+1;
+                if(b<=(n-1))
+                dp[b]--;
+            }
+        }
+        int ans=0;
+        for(int i=0;i<n;i++){
+            ans+=dp[i];
+            if(ans<=0)
+            return false;
+        }
+        return true;
+    }
+};
