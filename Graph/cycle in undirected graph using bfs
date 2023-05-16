@@ -1,0 +1,31 @@
+bool solve(int src,vector<bool>&vis,vector<int> adj[]){
+        queue<pair<int,int>>q;
+        q.push({src,-1});
+        vis[src]=true;
+        while(!q.empty()){
+            int node=q.front().first;
+            int par=q.front().second;
+            q.pop();
+            for(auto x:adj[node]){
+                if(vis[x] && x!=par)
+                return true;
+                if(!vis[x]){
+                    vis[x]=true;
+                 q.push({x,node});   
+                }
+            }
+        }
+        return false;
+    }
+    
+    bool isCycle(int V, vector<int> adj[]) {
+        // Code here
+      vector<bool>vis(V,false);
+      for(int i=0;i<V;i++){
+          if(!vis[i]){
+            if(solve(i,vis,adj))
+          return true;   
+          }
+      }
+      return false;
+    }
